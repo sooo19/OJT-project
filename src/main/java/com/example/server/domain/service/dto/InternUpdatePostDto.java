@@ -1,4 +1,4 @@
-package com.example.server.domain.service.Dto;
+package com.example.server.domain.service.dto;
 
 public record InternUpdatePostDto(
         String content,

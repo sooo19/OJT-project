@@ -1,4 +1,4 @@
-package com.example.server.domain.service.Dto;
+package com.example.server.domain.service.dto;
 
 import com.example.server.domain.model.Member;
 

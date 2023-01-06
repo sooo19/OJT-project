@@ -5,7 +5,7 @@ import com.example.server.domain.model.Position;
 import com.example.server.domain.model.Post;
 import com.example.server.domain.repository.MemberRepository;
 import com.example.server.domain.repository.PostRepository;
-import com.example.server.domain.service.Dto.MemberWithBuddyInfoDto;
+import com.example.server.domain.service.dto.MemberWithBuddyInfoDto;
 import com.example.server.global.error.exception.MemberException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,9 +27,9 @@ public class MemberService {
                 .password("test1234")
                 .employeeNumber(202204179L)
                 .name("이용훈")
-                .position(Position.INTERN)
+                .position(Position.STAFF)
                 .bizPart("서비스혁신사업부")
-                .team("제조운영2팀")
+                .team("제조운영2팀 테크윈 파트")
                 .partnerId(2L)
                 .build();
 
@@ -39,9 +39,9 @@ public class MemberService {
                 .password("test1234")
                 .employeeNumber(202204177L)
                 .name("윤수림")
-                .position(Position.STAFF)
+                .position(Position.ASSISTANT_MANAGER)
                 .bizPart("서비스혁신사업부")
-                .team("제조운영2팀")
+                .team("제조운영2팀 테크윈파트")
                 .partnerId(1L)
                 .build();
 

@@ -1,6 +1,6 @@
 package com.example.server.domain.service;
 
-import com.example.server.domain.service.Dto.MailDto;
+import com.example.server.domain.service.dto.MailDto;
 import lombok.AllArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
