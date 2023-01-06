@@ -1,6 +1,23 @@
 spring:
   application:
     name: nexa-server
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dldydgns530@gmail.com
+    password: [gmail app password]
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          transport:
+            protocol: smtp
+          ssl:
+            trust: smtp.gmail.com
+            protocols: TLSv1.2
+
 
   jpa:
     open-in-view: false
@@ -8,3 +25,4 @@ spring:
       hibernate:
         default_batch_fetch_size: 500
         format_sql: true
+        show_sql: true
