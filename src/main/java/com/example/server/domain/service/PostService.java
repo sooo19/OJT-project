@@ -4,7 +4,7 @@ import com.example.server.domain.model.Member;
 import com.example.server.domain.repository.MemberRepository;
 import com.example.server.domain.model.Post;
 import com.example.server.domain.repository.PostRepository;
-import com.example.server.domain.service.Dto.InternUpdatePostDto;
+import com.example.server.domain.service.dto.InternUpdatePostDto;
 import com.example.server.global.error.exception.MemberException;
 import com.example.server.global.error.exception.PostException;
 import lombok.RequiredArgsConstructor;
