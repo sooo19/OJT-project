@@ -1,6 +1,5 @@
 package com.example.server;
 
-import com.example.server.domain.service.MemberService;
 import com.example.server.domain.service.PostMemberInitService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.ApplicationArguments;

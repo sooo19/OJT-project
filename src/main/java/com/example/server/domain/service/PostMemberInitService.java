@@ -46,7 +46,43 @@ public class PostMemberInitService {
         memberRepository.save(intern);
         memberRepository.save(buddy);
 
-        for (int i = 1; i <= 6; i++) {
+        // 내용 쓰고, feedback 완료 -> checked, checked
+        Post post1 = Post.builder()
+                .member(intern)
+                .name(intern.getName())
+                .date(LocalDateTime.now())
+                .week(1)
+                .bizPart(intern.getBizPart())
+                .team(intern.getTeam())
+                .buddyPosition(buddy.getPosition())
+                .buddyName(buddy.getName())
+                .buddyTask(buddy.getBizPart().concat(" - ").concat(buddy.getTeam()))
+                .content("content complete")
+                .report("report complete")
+                .feedbackComplete("1")
+                .submit("1")
+                .build();
+        postRepository.save(post1);
+
+        // 내용만 작성, -> checked, unchecked
+        Post post2 = Post.builder()
+                .member(intern)
+                .name(intern.getName())
+                .date(LocalDateTime.now())
+                .week(1)
+                .bizPart(intern.getBizPart())
+                .team(intern.getTeam())
+                .buddyPosition(buddy.getPosition())
+                .buddyName(buddy.getName())
+                .buddyTask(buddy.getBizPart().concat(" - ").concat(buddy.getTeam()))
+                .content("content complete")
+                .report("")
+                .feedbackComplete("1")
+                .submit("0")
+                .build();
+        postRepository.save(post1);
+
+        for (int i = 3; i <= 6; i++) {
             Post post = Post.builder()
                     .member(intern)
                     .name(intern.getName())
@@ -57,8 +93,10 @@ public class PostMemberInitService {
                     .buddyPosition(buddy.getPosition())
                     .buddyName(buddy.getName())
                     .buddyTask(buddy.getBizPart().concat(" - ").concat(buddy.getTeam()))
-                    .feedbackComplete("0")
-                    .submit("0")
+                    .content("content complete")
+                    .report("report complete")
+                    .feedbackComplete("1")
+                    .submit("1")
                     .build();
             postRepository.save(post);
         }
