@@ -5,7 +5,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: dldydgns530@gmail.com
-    password: [gmail app password]
+    password: ENC(Q9O/JMbEjfm1PsMvrOnsmhm8jv4P0deknX6osMWAhd8=)
     properties:
       mail:
         smtp:
@@ -26,3 +26,6 @@ spring:
         default_batch_fetch_size: 500
         format_sql: true
         show_sql: true
+jasypt:
+  encryptor:
+    password: hanwhaOJTProject

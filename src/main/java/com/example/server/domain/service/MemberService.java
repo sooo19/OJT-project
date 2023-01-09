@@ -18,53 +18,6 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
-    private final PostRepository postRepository;
-
-    public void sampleJoin() {
-        Member intern = Member.builder()
-                .id(1L)
-                .circleId("yong9753")
-                .password("test1234")
-                .employeeNumber(202204179L)
-                .name("이용훈")
-                .position(Position.STAFF)
-                .bizPart("서비스혁신사업부")
-                .team("제조운영2팀 테크윈 파트")
-                .partnerId(2L)
-                .build();
-
-        Member buddy = Member.builder()
-                .id(2L)
-                .circleId("soorim18")
-                .password("test1234")
-                .employeeNumber(202204177L)
-                .name("윤수림")
-                .position(Position.ASSISTANT_MANAGER)
-                .bizPart("서비스혁신사업부")
-                .team("제조운영2팀 테크윈파트")
-                .partnerId(1L)
-                .build();
-
-        memberRepository.save(intern);
-        memberRepository.save(buddy);
-
-        for (int i = 1; i <= 6; i++) {
-            Post post = Post.builder()
-                    .member(intern)
-                    .name(intern.getName())
-                    .date(LocalDateTime.now())
-                    .week(i)
-                    .bizPart(intern.getBizPart())
-                    .team(intern.getTeam())
-                    .buddyPosition(buddy.getPosition())
-                    .buddyName(buddy.getName())
-                    .buddyTask(buddy.getBizPart().concat(" - ").concat(buddy.getTeam()))
-                    .feedbackComplete("0")
-                    .submit("0")
-                    .build();
-            postRepository.save(post);
-        }
-    }
 
     public MemberWithBuddyInfoDto getInternWithBuddyInfo(Long internId) {
         Member intern = memberRepository.findById(internId)
