@@ -5,9 +5,11 @@ import com.example.server.domain.model.Post;
 import com.example.server.domain.service.PostService;
 import com.example.server.domain.service.dto.InternUpdatePostDto;
 import com.example.server.domain.service.dto.MemberWithBuddyInfoDto;
+import com.example.server.domain.util.OutportMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @RestController
@@ -19,32 +21,42 @@ public class PostController {
     private final Long buddyId = 2L;
 
     @GetMapping
-    public List<Post> posts(){
-        return postService.getPosts(internId);
+    public @ResponseBody LinkedHashMap<String, Object> posts(){
+        return OutportMapper.toDto(postService.getPosts(internId));
     }
 
     @GetMapping("/{postId}")
-    public Post post(@PathVariable Long postId){
-        return postService.getPost(postId);
+    public @ResponseBody LinkedHashMap<String, Object> post(
+            @PathVariable Long postId
+    ){
+        return OutportMapper.toDto(postService.getPost(postId));
     }
 
-    @PutMapping("/intern/{postId}")
-    public Post updatePostContent(@PathVariable Long postId, UpdatePostDto updatePostDto){
+    @PostMapping("/intern/{postId}")
+    public @ResponseBody LinkedHashMap<String, Object> updatePostContent(
+            @PathVariable Long postId, UpdatePostDto updatePostDto
+    ){
         InternUpdatePostDto internUpdatePostDto = new InternUpdatePostDto(updatePostDto.content(), updatePostDto.report());
-        return postService.internUpdatePost(postId, internUpdatePostDto);
+        return OutportMapper.toDto(postService.internUpdatePost(postId, internUpdatePostDto));
     }
-    @PutMapping("/buddy/{postId}")
-    public Post updatePostFeedback(@PathVariable Long postId, String feedback){
-        return postService.buddyUpdatePost(postId, feedback);
-    }
-
-    @PutMapping("/post/{postId}/submit/{week}")
-    public Post submitPost(@PathVariable Long postId, @PathVariable int week){
-        return postService.submitPost(postId, buddyId, week);
+    @PostMapping("/buddy/{postId}")
+    public @ResponseBody LinkedHashMap<String, Object> updatePostFeedback(
+            @PathVariable Long postId, String feedback
+    ){
+        return OutportMapper.toDto(postService.buddyUpdatePost(postId, feedback));
     }
 
-    @PutMapping("/post/{postId}/feedback/{week}")
-    public Post completePostFeedback(@PathVariable Long postId, @PathVariable int week){
-        return postService.buddyCompleteFeedback(postId, internId, week);
+    @PostMapping("/{postId}/submit/{week}")
+    public @ResponseBody LinkedHashMap<String, Object> submitPost(
+            @PathVariable Long postId, @PathVariable int week
+    ){
+        return OutportMapper.toDto(postService.submitPost(postId, buddyId, week));
+    }
+
+    @PostMapping("/{postId}/feedback/{week}")
+    public @ResponseBody LinkedHashMap<String, Object> completePostFeedback(
+            @PathVariable Long postId, @PathVariable int week
+    ){
+        return OutportMapper.toDto(postService.buddyCompleteFeedback(postId, internId, week));
     }
 }

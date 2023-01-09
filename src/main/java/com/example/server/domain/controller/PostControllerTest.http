@@ -1,0 +1,32 @@
+# PostController Test
+### 1. post list 불러오기
+GET http://localhost:8080/api/v1/post
+
+### 2. 단건 post 불러오기
+GET http://localhost:8080/api/v1/post/1
+
+### 3. 인턴 post content, report 수정
+POST http://localhost:8080/api/v1/post/intern/1
+Content-Type: application/json
+
+{
+  "content" : "new content",
+  "report" : "new report"
+}
+
+### 4. 버디 post content, report 수정
+POST http://localhost:8080/api/v1/post/buddy/1
+Content-Type: application/json
+
+{
+  "feedback" : "new feedback"
+}
+
+### 4. 제출버튼 클릭
+POST http://localhost:8080/api/v1/post/1/submit/1
+Content-Type: application/json
+
+
+### 5. 제출버튼 클릭
+POST http://localhost:8080/api/v1/post/1/feedback/1
+Content-Type: application/json
