@@ -42,7 +42,7 @@ public class MemberService {
                 });
 
         Long internId = buddy.getPartnerId();
-        Member intern = memberRepository.findById(buddyId)
+        Member intern = memberRepository.findById(internId)
                 .orElseThrow(() -> {
                     throw MemberException.notFoundMember(internId);
                 });

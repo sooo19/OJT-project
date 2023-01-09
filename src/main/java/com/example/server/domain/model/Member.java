@@ -31,9 +31,12 @@ public class Member {
     @Column(name ="biz_part", nullable = false)
     private String bizPart;
 
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "position", nullable = false)
     private Position position;
+
+    @Column(name = "korean_position", nullable = false)
+    private String koreanPosition;
 
     @Column(name = "team", nullable = false)
     private String team;
@@ -50,6 +53,7 @@ public class Member {
         this.name = name;
         this.bizPart = bizPart;
         this.position = position;
+        this.koreanPosition = position.getKoreanPosition();
         this.team = team;
         this.partnerId = partnerId;
     }

@@ -36,9 +36,8 @@ public class Post {
     @Column(name = "team", nullable = false)
     private String team;
 
-    @Enumerated(value = EnumType.STRING)
     @Column(name = "buddy_position", nullable = false)
-    private Position buddyPosition;
+    private String buddyPosition;
 
     @Column(name = "buddy_name", nullable = false)
     private String buddyName;
@@ -69,7 +68,7 @@ public class Post {
         this.week = week;
         this.bizPart = bizPart;
         this.team = team;
-        this.buddyPosition = buddyPosition;
+        this.buddyPosition = buddyPosition.getKoreanPosition();
         this.buddyName = buddyName;
         this.buddyTask = buddyTask;
         this.content = content;

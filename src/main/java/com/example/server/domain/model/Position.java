@@ -12,4 +12,8 @@ public enum Position {
     Position(String koreanPosition) {
         this.koreanPosition = koreanPosition;
     }
+
+    public String getKoreanPosition() {
+        return koreanPosition;
+    }
 }

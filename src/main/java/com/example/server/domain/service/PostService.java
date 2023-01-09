@@ -39,6 +39,8 @@ public class PostService {
     }
 
     public Post internUpdatePost(Long postId, InternUpdatePostDto internUpdatePostDto){
+        System.out.println(internUpdatePostDto.content());
+        System.out.println(internUpdatePostDto.report());
         Post post = getPost(postId);
         post.changePostContent(internUpdatePostDto.content(), internUpdatePostDto.report());
         return post;
