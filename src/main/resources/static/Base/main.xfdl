@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="main" width="1280" height="720" titletext="New Form" initvalueid="버디 프로그램" onclick="Button01_onclick">
+    <Layouts>
+      <Layout height="720" mobileorientation="landscape" width="1280">
+        <Button id="Button00" taborder="0" text="버디" left="350" top="375" width="190" height="65" font="normal 20pt/normal &quot;Arial&quot;" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="1" text="신입사원" left="685" top="378" width="190" height="65" font="normal 20pt/normal &quot;Arial&quot;" onclick="Button01_onclick"/>
+        <Static id="Static00" taborder="2" text="버디 프로그램" left="490" top="203" width="270" height="129" textAlign="center" font="normal 30pt/normal &quot;Arial&quot;"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.go("Base::report_list_buddy.xfdl");
+};
+
+this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	this.go("Base::report_list.xfdl");
+};
+]]></Script>
+  </Form>
+</FDL>
