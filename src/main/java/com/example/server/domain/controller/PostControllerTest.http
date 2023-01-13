@@ -3,7 +3,7 @@
 GET http://localhost:8080/api/v1/post
 
 ### 2. 단건 post 불러오기
-GET http://localhost:8080/api/v1/post/1
+GET http://localhost:8080/api/v1/post/2
 
 ### 3. 인턴 post content, report 수정
 POST http://localhost:8080/api/v1/post/intern/1
@@ -27,6 +27,6 @@ POST http://localhost:8080/api/v1/post/1/submit/1
 Content-Type: application/json
 
 
-### 5. 제출버튼 클릭
+### 5. 피드백버튼 클릭
 POST http://localhost:8080/api/v1/post/1/feedback/1
 Content-Type: application/json

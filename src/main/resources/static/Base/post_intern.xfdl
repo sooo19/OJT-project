@@ -2,9 +2,9 @@
 <FDL version="2.1">
   <Form id="post" width="1280" height="720" titletext="New Form" onload="post_onload">
     <Layouts>
-      <Layout height="720" mobileorientation="landscape" width="1280">
+      <Layout height="720" mobileorientation="landscape" width="1280" stepcount="0">
         <Static id="Static00" taborder="1" text="작성자 정보" left="30" top="27" width="178" height="44" font="normal 18pt/normal &quot;Arial&quot;"/>
-        <Grid id="Grid00" taborder="2" left="40" top="211" width="990" height="69" binddataset="Dataset00">
+        <Grid id="Grid00" taborder="2" left="40" top="71" width="990" height="69" binddataset="Dataset00">
           <Formats>
             <Format id="default">
               <Columns>
@@ -36,7 +36,7 @@
           </Formats>
         </Grid>
         <Static id="Static01" taborder="3" text="버디 정보" left="31" top="160" width="178" height="44" font="normal 18pt/normal &quot;Arial&quot;" onclick="Static00_00_onclick"/>
-        <Grid id="Grid01" taborder="0" left="40" top="74" width="860" height="66" binddataset="Dataset01">
+        <Grid id="Grid01" taborder="0" left="40" top="204" width="860" height="66" binddataset="Dataset01">
           <Formats>
             <Format id="default">
               <Columns>
@@ -121,17 +121,17 @@
         </Grid>
         <Button id="Button00" taborder="8" text="저장" left="437" top="656" width="187" height="48" onclick="Button00_onclick"/>
         <Button id="Button01" taborder="9" text="제출" left="657" top="656" width="187" height="48" onclick="Button01_onclick"/>
-        <Static id="Static04" taborder="10" text="Static04" left="40" top="248" width="165" height="32" textAlign="center"/>
-        <Static id="Static05" taborder="11" text="Static05" left="204" top="247" width="198" height="36" textAlign="center"/>
-        <Static id="Static06" taborder="12" text="Static06" left="404" top="247" width="168" height="36" textAlign="center"/>
-        <Static id="Static07" taborder="13" text="Static07" left="572" top="245" width="236" height="36" onclick="Static07_onclick" textAlign="center"/>
-        <Static id="Static08" taborder="14" text="Static08" left="808" top="245" width="212" height="38" textAlign="center"/>
-        <Static id="Static12" taborder="15" text="Static12" left="514" top="105" width="384" height="34" textAlign="center"/>
-        <Static id="Static11" taborder="16" text="Static11" left="295" top="106" width="219" height="34" textAlign="center"/>
-        <Static id="Static10" taborder="17" text="Static10" left="41" top="106" width="253" height="34" textAlign="center"/>
-        <TextArea id="TextArea01" taborder="18" left="40" top="375" width="1200" height="68" enable="false"/>
-        <TextArea id="TextArea02" taborder="19" left="41" top="469" width="1196" height="65" enable="false"/>
-        <TextArea id="TextArea03" taborder="20" left="41" top="570" width="1199" height="65"/>
+        <Static id="Static04" taborder="10" text="Static04" left="40" top="105" width="165" height="32" textAlign="center"/>
+        <Static id="Static05" taborder="11" text="Static05" left="204" top="104" width="198" height="36" textAlign="center"/>
+        <Static id="Static06" taborder="12" text="Static06" left="404" top="104" width="168" height="36" textAlign="center"/>
+        <Static id="Static07" taborder="13" text="Static07" left="572" top="102" width="236" height="36" onclick="Static07_onclick" textAlign="center"/>
+        <Static id="Static08" taborder="14" text="Static08" left="808" top="102" width="212" height="38" textAlign="center"/>
+        <Static id="Static10" taborder="15" text="Static10" left="40" top="237" width="253" height="34" textAlign="center"/>
+        <Static id="Static11" taborder="16" text="Static11" left="294" top="237" width="219" height="34" textAlign="center"/>
+        <Static id="Static12" taborder="17" text="Static12" left="513" top="236" width="384" height="34" textAlign="center"/>
+        <TextArea id="TextArea01" taborder="18" left="40" top="375" width="1200" height="68"/>
+        <TextArea id="TextArea02" taborder="19" left="41" top="469" width="1196" height="65"/>
+        <TextArea id="TextArea03" taborder="20" left="41" top="570" width="1199" height="65" enable="false"/>
       </Layout>
     </Layouts>
     <Objects>
@@ -143,15 +143,6 @@
           <Column id="사업본부" type="STRING" size="256"/>
           <Column id="팀" type="STRING" size="256"/>
         </ColumnInfo>
-        <Rows>
-          <Row>
-            <Col id="작성자"/>
-            <Col id="작성일"/>
-            <Col id="주차"/>
-            <Col id="사업본부"/>
-            <Col id="팀"/>
-          </Row>
-        </Rows>
       </Dataset>
       <Dataset id="Dataset01">
         <ColumnInfo>
@@ -194,7 +185,7 @@
       <DataObject id="DataObject00" onerror="DataObject00_onerror" onload="DataObject00_onload" onsuccess="DataObject00_onsuccess"/>
     </Objects>
     <Script type="xscript5.1"><![CDATA[var serviceid;  //DataObject request 통신시 사용한 Service ID
-var isFeedbackComplete; //feedback 유무 판단 
+var isSubmit; //Submit 유무 판단 
 var strData; //data
 
 /////////////////////////////////////////////
@@ -207,32 +198,34 @@ this.post_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 
 // 제출 버튼 클릭시
 this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo) {
-   if(isFeedbackComplete == "1"){
-       this.alert("이미 피드백 완료하였습니다")
+
+   if(isSubmit == "1"){
+       this.alert("이미 제출 완료하였습니다")
    }else{
-	   //저장
+       // 저장
 	   var header = {"Content-Type" : "application/json;charset=UTF-8"};
 	   var json_param = {
 		 "httpheader" : header,
 		 "postdata" : JSON.stringify({
-		 "feedback":this.TextArea03.value}),
+		 "content":this.TextArea01.value,
+		 "report":this.TextArea02.value}),
 		 "async" : true  
 	   }
 	   var method_type = "POST";  //PUT
-	   this.DataObject00.request("UPDATE", method_type, "http://localhost:8080/api/v1/post/buddy/"+this.parent.index, json_param);  
+	   this.DataObject00.request("UPDATE", method_type, "http://localhost:8080/api/v1/post/intern/"+this.parent.index, json_param);  
 	   this.alert("저장 되었습니다");
 	   
-	   //제출
+	   
+	   // 제출
 	   var header = {"Content-Type" : "application/json;charset=UTF-8"};
 	   var json_param = {
 		 "httpheader" : header,
-		 "feedback":this.TextArea03.value,
 		 "async" : true  
 	   }
 	   var method_type = "POST";  //PUT
-	   this.DataObject00.request("UPDATE", method_type, "http://localhost:8080/api/v1/post/"+strData.id+"/feedback/"+this.parent.index, json_param);  
-	   this.alert("피드백 완료 되었습니다");
-
+	   this.DataObject00.request("UPDATE", method_type, "http://localhost:8080/api/v1/post/"+strData.id+"/submit/"+this.parent.index, json_param);  
+	   this.alert("제출 완료 되었습니다");
+       
 	   ////////////////////////////////////////////////
 	   // 창 종료 후 parent frame 새로고침 필요! %%%%
 	   this.close();
@@ -243,23 +236,22 @@ this.Button01_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo) {
 // 저장 버튼 클릭시
  this.Button00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
  {
-   if(isFeedbackComplete == "1"){
-       this.alert("이미 피드백 완료하였습니다")
+   if(isSubmit == "1"){
+       this.alert("이미 제출 완료하였습니다")
    }else{
-       //저장
 	   var header = {"Content-Type" : "application/json;charset=UTF-8"};
 	   var json_param = {
 		 "httpheader" : header,
 		 "postdata" : JSON.stringify({
-		 "feedback":this.TextArea03.value}),
+		 "content":this.TextArea01.value,
+		 "report":this.TextArea02.value}),
 		 "async" : true  
 	   }
 	   var method_type = "POST";  //PUT
-	   this.DataObject00.request("UPDATE", method_type, "http://localhost:8080/api/v1/post/buddy/"+this.parent.index, json_param);  
+	   this.DataObject00.request("UPDATE", method_type, "http://localhost:8080/api/v1/post/intern/"+this.parent.index, json_param);  
 	   this.alert("저장 되었습니다");
 	   };
    }
-   
 
 //서버에 샘플데이터 생성
 this.fn_CreateDummyData = function(){
@@ -299,10 +291,10 @@ this.DataObject00_onsuccess = function(obj:nexacro.DataObject,e:nexacro.DataObje
   strArea += "status : " + strStatus +"\n\n";
   strArea += "data : "+JSON.stringify(strData) +"\n\n";
   strArea += "message : "+strMsg +"\n";
-  
-  //feedback 체크
-  isFeedbackComplete = strData.feedbackComplete;
 
+  //submit 체크
+  isSubmit = strData.submit;
+  
   //작성자 정보
   this.Static04.set_text(strData.id);
   this.Static05.set_text(strData.date);
@@ -326,9 +318,7 @@ this.DataObject00_onerror = function(obj:nexacro.DataObject,e:nexacro.DataObject
 {
   alert(e.statuscode +":"+e.errormsg);
   this.TextArea00.set_value(e.statuscode +":"+e.errormsg);
-};]]></Script>
-    <Bind>
-      <BindItem id="item0" compid="Grid02" propid="binddataset" datasetid="Dataset02" columnid="활동내용"/>
-    </Bind>
+};
+]]></Script>
   </Form>
 </FDL>
